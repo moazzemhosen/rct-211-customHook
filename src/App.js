@@ -1,23 +1,21 @@
-import logo from './logo.svg';
+
 import './App.css';
+import { useTimeout } from './Hook/useTimeout';
+import { useFetch } from './Hook/useFetch';
 
 function App() {
+  const ready = useTimeout(5000)
+  
+  let data= useFetch()
+  console.log(data);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>{ready ? "Ready" : " Not-Ready"}</h1>
+      
+        {data.map((e) => {
+          return <div key={e.id}>{e.login}</div>;
+        })}
+      
     </div>
   );
 }
